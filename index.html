@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cardly</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="page">
+
+    <header class="top-bar">
+      <div class="brand">
+        <h1>Cardly</h1>
+        <p class="tagline">Turn your notes into flashcards, instantly.</p>
+      </div>
+      <button id="settings-btn">⚙ Settings</button>
+    </header>
+
+    <div id="settings-panel" class="settings-panel hidden">
+      <label for="api-key-input">Gemini API Key</label>
+      <input id="api-key-input" type="password" value="AQ.Ab8RN6KAN9XLZloTWAB3mRVAeC5-wzzGMi8qjsyx8OBYNXQuMQ" placeholder="Paste your API key here" />
+    </div>
+
+    <section class="input-card">
+      <textarea id="notes-input" placeholder="Paste your lecture notes here..."></textarea>
+
+      <div class="pdf-row">
+        <label class="pdf-label">Or upload a PDF of your notes</label>
+        <input id="pdf-input" type="file" accept="application/pdf" />
+      </div>
+
+      <button id="generate-btn">Generate Flashcards</button>
+      <p id="status-msg"></p>
+    </section>
+
+    <p id="empty-state" class="empty-state">Your flashcards will show up here.</p>
+    <section id="output" class="cards-grid"></section>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
