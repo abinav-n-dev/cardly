@@ -1,0 +1,790 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --accent: #5b3df2;
+  --accent-dark: #4527d6;
+  --accent-tint: #ede9fe;
+  --peach: #fde8dc;
+  --peach-border: #f5c9ad;
+  --ink: #17151f;
+  --ink-soft: #6b6879;
+  --bg: #fafafa;
+  --card: #ffffff;
+  --border: #e8e6ec;
+  --danger: #d64545;
+}
+
+/* Dark mode: same variable names, different values.
+   Adding the "dark" class to <body> is all it takes to
+   swap the whole site's colors, since every rule below
+   uses var(--...) instead of hardcoded colors. */
+body.dark {
+  --accent: #8b6bff;
+  --accent-dark: #6d4fe0;
+  --accent-tint: #241f3d;
+  --peach: #3d2a1a;
+  --peach-border: #6b4a2a;
+  --ink: #f0eefa;
+  --ink-soft: #a8a1c4;
+  --bg: #14111f;
+  --card: #1e1a30;
+  --border: #322c4d;
+  --danger: #ff6b7a;
+}
+
+body.dark .hero-watermark {
+  color: white;
+}
+
+body.dark #settings-btn,
+body.dark #theme-toggle-btn {
+  background: var(--card);
+}
+
+body.dark .quiz-option-correct {
+  background: #1e3d28 !important;
+  border-color: #3ea15c !important;
+  color: #6ee495 !important;
+}
+
+body.dark .quiz-option-wrong {
+  background: #3d1e1e !important;
+  border-color: #b3413a !important;
+  color: #ff8f85 !important;
+}
+
+body.dark .key-banner {
+  background: #3d2f10;
+  border-color: #6b5220;
+  color: #ffd68a;
+}
+
+body.dark .card-back {
+  color: #f5d9c0;
+}
+
+body {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: 'Inter', Arial, sans-serif;
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ---------- Top nav ---------- */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 40px;
+}
+
+.top-nav .brand {
+  font-family: 'Manrope', sans-serif;
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#theme-toggle-btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  width: 38px;
+  height: 38px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#theme-toggle-btn:hover {
+  border-color: var(--accent);
+}
+
+#settings-btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#settings-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ---------- Settings panel ---------- */
+.settings-panel {
+  max-width: 500px;
+  margin: 20px auto 0;
+  background: var(--accent-tint);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px 18px;
+}
+
+.settings-panel label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+#api-key-input {
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  outline: none;
+}
+
+.key-note {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin: 8px 0 0;
+}
+
+.key-note a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.key-banner {
+  max-width: 500px;
+  margin: 20px auto 0;
+  background: var(--peach);
+  border: 1px solid var(--peach-border);
+  color: #8a4a1f;
+  font-size: 13px;
+  padding: 11px 16px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ---------- Hero, Brave-style with watermark ---------- */
+.hero {
+  position: relative;
+  text-align: center;
+  padding: 70px 20px 50px;
+  max-width: 780px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.hero-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Manrope', sans-serif;
+  font-size: 140px;
+  font-weight: 800;
+  color: var(--ink);
+  opacity: 0.035;
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: -4px;
+  z-index: 0;
+}
+
+.hero h1 {
+  position: relative;
+  font-family: 'Manrope', sans-serif;
+  font-size: 52px;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -1.5px;
+  line-height: 1.08;
+  color: var(--ink);
+  z-index: 1;
+}
+
+.hero-sub {
+  position: relative;
+  margin: 18px 0 0;
+  color: var(--ink-soft);
+  font-size: 16px;
+  z-index: 1;
+}
+
+/* ---------- Main content ---------- */
+.content {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 30px 24px 100px;
+}
+
+/* ---------- Input card ---------- */
+.input-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+textarea {
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--card);
+  border: none;
+  border-radius: 16px;
+  padding: 24px;
+  outline: none;
+  height: 220px;
+  resize: vertical;
+  line-height: 1.65;
+}
+
+.input-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 14px 16px;
+  border-top: 1px solid var(--border);
+}
+
+.pdf-row {
+  display: flex;
+  align-items: center;
+}
+
+#pdf-input {
+  font-size: 12px;
+  color: var(--ink-soft);
+  max-width: 180px;
+}
+
+#pdf-input::file-selector-button {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-family: inherit;
+  color: var(--ink-soft);
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+/* ---------- Options ---------- */
+.options-row {
+  display: flex;
+  gap: 8px;
+}
+
+.option-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 15px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.option-pill:has(input:checked) {
+  background: var(--accent-tint);
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+.option-pill input {
+  width: auto;
+  margin: 0;
+  cursor: pointer;
+  accent-color: var(--accent);
+}
+
+#generate-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 26px;
+  font-size: 14.5px;
+  font-weight: 700;
+  font-family: 'Manrope', sans-serif;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+
+#generate-btn:hover {
+  background: var(--accent-dark);
+}
+
+#status-msg {
+  text-align: center;
+  font-size: 13px;
+  color: var(--danger);
+  min-height: 18px;
+  margin: 10px 0 0;
+}
+
+/* ---------- Summary (pastel tint card, Brave-card style) ---------- */
+.summary-card {
+  background: var(--accent-tint);
+  border: 1px solid #ddd4fb;
+  border-radius: 20px;
+  padding: 24px 26px;
+  margin-bottom: 32px;
+}
+
+.summary-card h2 {
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--accent-dark);
+  margin: 0 0 10px;
+}
+
+.summary-card p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* ---------- Empty state ---------- */
+.empty-state {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 14px;
+  padding: 40px 0;
+  border: 1.5px dashed var(--border);
+  border-radius: 20px;
+}
+
+/* ---------- Flashcards ---------- */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  perspective: 1200px;
+  height: 180px;
+  cursor: pointer;
+  position: relative;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 18px;
+  padding: 22px 20px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.card-front {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.card-back {
+  background: var(--peach);
+  border: 1px solid var(--peach-border);
+  color: #6b3410;
+  font-weight: 500;
+  transform: rotateY(180deg);
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-source {
+  font-size: 11px;
+  font-weight: 400;
+  font-style: italic;
+  opacity: 0.75;
+}
+
+/* ---------- Floating chat widget ---------- */
+.chat-widget {
+  position: fixed;
+  bottom: 26px;
+  right: 26px;
+  z-index: 100;
+}
+
+.chat-toggle {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  border: none;
+  font-size: 23px;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(91, 61, 242, 0.3);
+  transition: transform 0.15s ease;
+}
+
+.chat-toggle:hover {
+  transform: scale(1.05);
+}
+
+.chat-panel {
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  width: 320px;
+  max-height: 440px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chat-panel-header {
+  background: var(--accent);
+  color: white;
+  padding: 14px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Manrope', sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-panel-header button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-height: 160px;
+  max-height: 270px;
+  background: var(--bg);
+}
+
+.chat-bubble {
+  padding: 9px 13px;
+  border-radius: 14px;
+  font-size: 13px;
+  max-width: 85%;
+  line-height: 1.45;
+}
+
+.chat-user {
+  align-self: flex-end;
+  background: var(--accent);
+  color: white;
+}
+
+.chat-bot {
+  align-self: flex-start;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--ink);
+}
+
+.chat-input-row {
+  display: flex;
+  border-top: 1px solid var(--border);
+  padding: 10px;
+  gap: 7px;
+  background: var(--card);
+}
+
+.chat-input-row input {
+  flex: 1;
+  font-size: 13px;
+  padding: 9px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.chat-input-row button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 0 16px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.chat-input-row button:hover {
+  background: var(--accent-dark);
+}
+
+/* ---------- Quiz Mode ---------- */
+.quiz-btn {
+  display: block;
+  margin: 24px auto;
+  background: var(--card);
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Manrope', sans-serif;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.quiz-btn:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.quiz-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.quiz-progress {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+.quiz-question {
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 20px;
+  line-height: 1.4;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.quiz-option-btn {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 18px;
+  font-size: 14.5px;
+  font-family: 'Inter', sans-serif;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.quiz-option-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--accent-tint);
+}
+
+.quiz-option-btn:disabled {
+  cursor: default;
+}
+
+.quiz-option-correct {
+  background: #dcf5e3 !important;
+  border-color: #1e7d3a !important;
+  color: #1e7d3a !important;
+  font-weight: 600;
+}
+
+.quiz-option-wrong {
+  background: #fde2e2 !important;
+  border-color: #b3261e !important;
+  color: #b3261e !important;
+  font-weight: 600;
+}
+
+.quiz-action-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 11px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Manrope', sans-serif;
+  cursor: pointer;
+}
+
+.quiz-action-btn:hover {
+  background: var(--accent-dark);
+}
+
+.quiz-result h3 {
+  font-family: 'Manrope', sans-serif;
+  font-size: 22px;
+  color: var(--ink);
+  margin: 0 0 20px;
+}
+
+/* ---------- Stats line ---------- */
+.stats-line {
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin: 0 0 20px;
+}
+
+/* ---------- History ---------- */
+.history-card {
+  margin-top: 8px;
+}
+
+.history-card h2 {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ink-soft);
+  margin: 0 0 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.history-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.history-item:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+.history-empty {
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 600px) {
+  .top-nav {
+    padding: 16px 20px;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+  }
+
+  .hero-watermark {
+    font-size: 70px;
+  }
+
+  .input-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #generate-btn {
+    width: 100%;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-panel {
+    width: calc(100vw - 52px);
+  }
+}

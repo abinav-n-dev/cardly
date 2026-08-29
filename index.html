@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cardly</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="top-nav">
+    <div class="brand">Cardly</div>
+    <div class="nav-right">
+      <button id="theme-toggle-btn">🌙</button>
+      <button id="settings-btn">⚙ Settings</button>
+    </div>
+  </header>
+
+  <div id="settings-panel" class="settings-panel hidden">
+    <label for="api-key-input">Gemini API Key</label>
+    <input id="api-key-input" type="password"  placeholder="Paste your API key here" />
+    <p class="key-note">Get a free key at <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com</a></p>
+  </div>
+
+  <section class="hero">
+    <div class="hero-watermark">CARDLY</div>
+    <h1>Study smarter,<br>not harder</h1>
+    <p class="hero-sub">Paste your notes or upload a PDF — get instant summaries, flashcards, and answers.</p>
+  </section>
+
+  <p class="key-banner">🔑 Please add your Gemini API key to continue and use this website. Click <strong>Settings</strong> above to add it.</p>
+
+  <main class="content">
+
+    <section class="input-card">
+      <textarea id="notes-input" placeholder="Enter or paste your lecture notes here, or upload a PDF below..."></textarea>
+
+      <div class="input-footer">
+        <div class="pdf-row">
+          <input id="pdf-input" type="file" accept="application/pdf" />
+        </div>
+
+        <div class="options-row">
+          <label class="option-pill">
+            <input type="checkbox" id="opt-summary" checked />
+            Summary
+          </label>
+          <label class="option-pill">
+            <input type="checkbox" id="opt-flashcards" checked />
+            Flashcards
+          </label>
+        </div>
+
+        <button id="generate-btn">✨ Generate</button>
+      </div>
+
+      <p id="status-msg"></p>
+    </section>
+
+    <section id="summary-section" class="summary-card hidden">
+      <h2>Summary</h2>
+      <p id="summary-text"></p>
+    </section>
+
+    <p id="empty-state" class="empty-state">Your flashcards will show up here.</p>
+    <section id="output" class="cards-grid"></section>
+
+    <button id="quiz-btn" class="quiz-btn hidden">📝 Quiz Me</button>
+
+    <section id="quiz-section" class="quiz-card hidden">
+      <div id="quiz-progress" class="quiz-progress"></div>
+
+      <p id="quiz-question" class="quiz-question"></p>
+
+      <div id="quiz-options" class="quiz-options"></div>
+
+      <button id="quiz-next-btn" class="quiz-action-btn hidden">Next Question</button>
+
+      <div id="quiz-result" class="quiz-result hidden">
+        <h3 id="quiz-score-text"></h3>
+        <button id="quiz-restart-btn" class="quiz-action-btn">Try Again</button>
+      </div>
+    </section>
+
+    <p id="stats-line" class="stats-line hidden"></p>
+
+    <section class="history-card">
+      <h2>Past sessions</h2>
+      <div id="history-list" class="history-list">
+        <p class="history-empty">No saved sessions yet.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Floating chat widget -->
+  <div id="chat-widget" class="chat-widget hidden">
+    <button id="chat-toggle-btn" class="chat-toggle">💬</button>
+    <div id="chat-panel" class="chat-panel hidden">
+      <div class="chat-panel-header">
+        <span>Ask a doubt</span>
+        <button id="chat-close-btn">✕</button>
+      </div>
+      <div id="chat-messages" class="chat-messages"></div>
+      <div class="chat-input-row">
+        <input id="chat-input" type="text" placeholder="Ask something about these notes..." />
+        <button id="chat-send-btn">Ask</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+  <!-- Firebase: our database, for saving study sessions -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAZYI4_ZN9-kHm9YCYB2WG-vPiNtLke104",
+      authDomain: "cardly-30fb6.firebaseapp.com",
+      projectId: "cardly-30fb6",
+      storageBucket: "cardly-30fb6.firebasestorage.app",
+      messagingSenderId: "625443007944",
+      appId: "1:625443007944:web:40b75784f703164ff3e4fd"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Make these available to script.js, which is a normal (non-module) script
+    window.db = db;
+    window.firestoreTools = { collection, addDoc, getDocs, query, orderBy, limit };
+    window.dispatchEvent(new Event("firebase-ready"));
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
